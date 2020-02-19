@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: whitesmoke;
+    background-image: linear-gradient(to left, #343536 0%, #1b1b1b 100%);
+}
+
+footer {
+    color: rgb(218, 218, 218);
+}
+
+.btn-grad {
+    background-image: linear-gradient(to right, #4CB8C4 0%, #3CD3AD 51%, #4CB8C4 100%)
+}
+
+.btn-grad:hover {
+    background-position: right center;
+}
+
+a {
+    color: #3CD3AD;
+}
+
+a:hover {
+    color: #4CB8C4;
+}
