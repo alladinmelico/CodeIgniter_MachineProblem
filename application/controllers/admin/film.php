@@ -11,5 +11,14 @@ class Film extends CI_Controller{
         $this->load->vars($data);
         $this->load->view('dashboard');
     }
+
+    function edit($id){
+        $data['title'] = "Edit Film";
+        $data['main'] = 'admin_create_edit';
+        $data['isEdit'] = true;
+        $data['film'] = $this->mFilm->getFilm($id);
+        $this->load->vars($data);
+        $this->load->view('dashboard');
+    }
 }
 ?>

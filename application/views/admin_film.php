@@ -1,6 +1,14 @@
 <h1 class="h1 mt-5"><?= $title;?></h1>
+<style>
+    .text-dim{
+        color: rgb(43, 155, 127);
+    }
+    td{
+        
+    }
+</style>
 <table class="table table-striped table-inverse text-light mt-5">
-    <thead class="thead-inverse">
+    <thead class="thead-inverse text-dim">
         <tr>
             <th></th>
             <th>ID</th>
@@ -11,8 +19,8 @@
             <th>Additional Info</th>
             <th>Genre</th>
             <th>Certificate</th>
-            <th>EDIT</th>
-            <th>DELETE</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +36,10 @@
                         <td scope="row"><?= $row['strGenre'];?></td>
                         <td scope="row"><?= $row['strCertificate'];?></td>
                         <td><a name="" id="" class="btn btn-primary" 
-                            href="<?= base_url();?>/admin/film/edit/<?= $row['lngFilmTitleID'];?>?>" role="button">EDIT</a>
+                            href="<?= base_url();?>admin/film/edit/<?= $row['lngFilmTitleID'];?>" role="button"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                        </td>
+                        <td><a name="" id="" class="btn btn-danger" 
+                            href="<?= base_url();?>admin/film/edit/<?= $row['lngFilmTitleID'];?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 <?php }?>

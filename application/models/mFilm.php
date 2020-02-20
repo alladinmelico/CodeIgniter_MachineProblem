@@ -23,7 +23,19 @@ class mFilm extends CI_Model{
 
         $Q->free_result();
         return $data;
-        
+    }
+
+    function getFilm($id){
+        $data = array();
+        $film = array('lngFilmTitleID' => $id);
+        $Q = $this->db->get_where('viewFilms',$film,1);
+
+        if($Q->num_rows() > 0){
+            $data = $Q -> row_array();
+        }
+
+        $Q->free_result();
+        return $data;
     }
 }
 ?>
