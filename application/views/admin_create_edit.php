@@ -9,19 +9,20 @@
         <img src="<?= base_url()."images/".$film['picture']?>" alt="">
     </div>
     <div class="row">
-        <div class="col">
-            <div class="form-group mt-5 justify-content-center">
+        <div class="col-sm-8">
+            <div class="form-group justify-content-center">
                 <?php
                 if ($isEdit){
-                    echo form_open('admin/film/edit');
+                    echo form_open_multipart('admin/film/editFilm');
+                    
                     $data = array('name'=>'picture',
                                     'type' => 'text',
-                                    'id'=>'pic',
+                                    'id'=>'picture',
                                     'class'=>'form-control');
                     echo form_label('Upload');
                     echo form_upload($data);
 
-                    $data = array('name'=>'title',
+                    $data = array('name'=>'strFilmTitle',
                                     'type' => 'text',
                                     'id'=>'strFilmTitle',
                                     'size'=>25,
@@ -76,19 +77,36 @@
         </div>          
     </div>
 
-        <div class="col">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti cum distinctio suscipit aspernatur porro nulla, unde aperiam deserunt itaque impedit, vel accusamus tempore provident dolore placeat error dignissimos tempora at.
+        <div class="col-sm-4 py-3 px-lg-5 border-left">
+            <?php
+                $dropdownGenre = array();
+                foreach($genres as $key=>$value){
+                    $dropdownGenre[$value['lngGenreID']] = $value['strGenre'];
+                }
+                $htmlParams = array('class' => 'form-control');
+                echo form_label('Genres');
+                echo form_dropdown('lngGenreID',$dropdownGenre,$film['lngGenreID'],$htmlParams);
+
+                $dropdownCert = array();
+                foreach($certificates as $key=>$value){
+                    $dropdownCert[$value['lngCertificateID']] = $value['strCertificate'];
+                }
+                echo form_label('Certificate');
+                echo form_dropdown('lngCertificateID',$dropdownCert,$film['lngCertificateID'],$htmlParams);
+
+
+            ?>
         </div>
-        
         
     </div>
     <div class="row justify-content-center">
         <?php
+            echo form_hidden('lngFilmTitleID',$film['lngFilmTitleID']);
             $data = array('name'=>'editFilm',
-            'type' => 'submit',
-            'id'=>'',
-            'value'=>'Save',
-            'class'=>'btn btn-success mt-5');
+                            'type' => 'submit',
+                            'id'=>'',
+                            'value'=>'Save',
+                            'class'=>'btn btn-success mt-5');
             echo form_submit($data);
             echo form_close();
         ?>

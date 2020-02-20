@@ -1,4 +1,4 @@
-<h1 class="h1 mt-5"><?= $title;?></h1>
+<h1 class="h1 mt-5"><?= $title;?><a href="<?php echo base_url();?>admin/film/create"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h1>
 <style>
     .text-dim{
         color: rgb(43, 155, 127);
@@ -26,7 +26,7 @@
         <tbody>
             <?php foreach($films as $row){?>
                     <tr>
-                        <td scope="row"><img src="<?php echo base_url()."images/".$row['picture'];?>" alt="" width="100"></td>
+                        <td scope="row"><img src="<?php echo base_url().$row['picture'];?>" alt="" width="100"></td>
                         <td scope="row"><?= $row['lngFilmTitleID'];?></td>
                         <td scope="row"><?= $row['strFilmTitle'];?></td>
                         <td scope="row"><?= $row['memFilmStory'];?></td>

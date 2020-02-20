@@ -37,5 +37,71 @@ class mFilm extends CI_Model{
         $Q->free_result();
         return $data;
     }
+
+    function getGenres(){
+        $data = array();
+        $Q = $this->db->get('tblFilmGenres');
+
+        if($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+        
+        $Q->free_result();
+        return $data;
+    }
+
+    function getCertificates(){
+        $data = array();
+        $Q = $this->db->get('tblFilmCertificates');
+
+        if($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+        
+        $Q->free_result();
+        return $data;
+    }
+
+    function updateFilm(){
+        $data = array(
+           'lngFilmTitleID' => $_POST['lngFilmTitleID'],
+           'strFilmTitle' => $_POST['strFilmTitle'],
+           'memFilmStory' => $_POST['memFilmStory'],
+           'dtmFilmReleaseDate' => $_POST['dtmFilmReleaseDate'],
+           'intFilmDuration' => $_POST['intFilmDuration'],
+           'memFilmAdditionalInfo' => $_POST['memFilmAdditionalInfo'],
+           'lngGenreID' => $_POST['lngGenreID'],
+           'lngCertificateID' => $_POST['lngCertificateID'],
+           'strSource' => $_POST['strSource']
+        );
+
+        $config['upload_path'] = './images/';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '500';
+        $config['remove_spaces'] = false;
+        $config['overwrite'] = false;
+        $config['max_width'] = '0';
+        $config['max_height'] = '0';
+
+        $this->load->library('upload',$config);
+
+        
+        if(! $this->upload->do_upload('picture')){
+            $this->upload->display_errors();
+            exit();
+        }
+
+        $image = $this->upload->data();
+        if($image['file_name']){
+            $data['picture'] = "images/".$image['file_name'];
+        }
+
+        $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
+        $this->db->update('tblFilmTitles',$data);
+    }
 }
 ?>
