@@ -23,3 +23,7 @@ a {
 a:hover {
     color: #4CB8C4;
 }
+
+.nav-link {
+    color: white;
+}

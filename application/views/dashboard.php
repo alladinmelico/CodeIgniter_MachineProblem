@@ -8,6 +8,10 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="<?php echo base_url()?>css/main.css">
+    <link href="<?= base_url()?>icons/css/all.css" rel="stylesheet">
+    <script defer src="<?= base_url()?>icons/js/all.js"></script>
+    <link href="<?= base_url()?>icons/css/solid.css" rel="stylesheet">
+    <script defer src="<?= base_url()?>icons/js/solid.js"></script>
   </head>
   <body>
       <div class="container-fluid ">
@@ -15,7 +19,7 @@
               <?php $this->load->view('admin_nav'); ?>
           </div>
 
-          <div class="row" id="main">
+          <div class="row justify-content-center" id="main">
               <?php $this->load->view($main);?>
           </div>
 
