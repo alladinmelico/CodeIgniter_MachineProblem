@@ -39,7 +39,8 @@
                             href="<?= base_url();?>admin/film/edit/<?= $row['lngFilmTitleID'];?>" role="button"><i class="fa fa-edit" aria-hidden="true"></i></a>
                         </td>
                         <td><a name="" id="" class="btn btn-danger" 
-                            href="<?= base_url();?>admin/film/edit/<?= $row['lngFilmTitleID'];?>" role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            href="<?= base_url();?>admin/film/delete/<?= $row['lngFilmTitleID'];?>/<?= $row['picture'];?>" 
+                            role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 <?php }?>

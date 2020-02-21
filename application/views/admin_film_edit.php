@@ -6,19 +6,19 @@
 <div class="container">
     <h1 class="h1"><?= $title;?></h1> 
     <div class="row justify-content-center">
-        <img src="<?= base_url()."images/".$film['picture']?>" alt="">
+        <img src="<?= base_url().$film['picture']?>" alt="" width="300">
     </div>
     <div class="row">
         <div class="col-sm-8">
             <div class="form-group justify-content-center">
                 <?php
-                if ($isEdit){
-                    echo form_open_multipart('admin/film/editFilm');
+                    echo form_open_multipart('admin/film/edit');
                     
                     $data = array('name'=>'picture',
                                     'type' => 'text',
                                     'id'=>'picture',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'rules'=>'required');
                     echo form_label('Upload');
                     echo form_upload($data);
 
@@ -70,9 +70,7 @@
                                     'class'=>'form-control');
                     echo form_label('Source');
                     echo form_input($data);
-                } else {
-
-                }
+                
                 ?>
         </div>          
     </div>

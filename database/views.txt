@@ -1,8 +1,8 @@
 viewFIm
 CREATE VIEW viewFilms AS
 SELECT film.lngFilmTitleID,film.strFilmTitle,film.memFilmStory,film.dtmFilmReleaseDate,
-film.intFilmDuration,film.memFilmAdditionalInfo,film.picture,film.strSource,GROUP_CONCAT(genre.strGenre) AS strGenre,
-GROUP_CONCAT(genre.lngGenreID) AS lngGenreID,cert.strCertificate,cert.lngCertificateID FROM tblfilmtitles film 
+film.intFilmDuration,film.memFilmAdditionalInfo,film.picture,film.strSource,genre.strGenre,
+genre.lngGenreID,cert.strCertificate,cert.lngCertificateID FROM tblfilmtitles film 
 INNER JOIN tblfilmgenres genre ON genre.lngGenreID = film.lngGenreID
 INNER JOIN tblfilmcertificates cert ON cert.lngCertificateID = film.lngCertificateID
 
