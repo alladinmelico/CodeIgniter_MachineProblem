@@ -1,8 +1,12 @@
+<?php
+    if(!$_SESSION['isAdmin']){
+        redirect('user');
+    }
+?>
 <style>
     .nav-link{
         color:white;
     }
-
 </style>
 
 <nav class="navbar navbar-expand-sm navbar-light">
@@ -38,8 +42,8 @@
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <a name="" id="" class="btn btn-outline-info ml-5" href="<?php echo base_url()?>login" role="button">
-            LOG <?php echo (FALSE)? "IN":"OUT"?></a>
+        <a name="" id="" class="btn btn-outline-info ml-5" href="<?php echo base_url()?>admin/dashboard/logout" role="button">
+            LOG OUT</a>
 
     </div>
 </nav>
