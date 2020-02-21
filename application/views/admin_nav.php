@@ -17,7 +17,10 @@
                 <a class="nav-link text-light" href="<?php echo base_url()?>">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-light" href="<?php echo base_url()?>admin/film">Film</a>
+                <a class="nav-link text-light" href="<?php echo base_url()?>admin/film">Films</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light" href="<?php echo base_url()?>admin/actor">Actors</a>
             </li>
             <!-- <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
