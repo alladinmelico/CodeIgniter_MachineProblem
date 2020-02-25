@@ -1,4 +1,4 @@
 <footer>
-    Copyright 2020 <br>
-    Alladin M. Melico
+    <center>Copyright 2020</center>  <br>
+    <center> Alladin M. Melico</center>
 </footer>

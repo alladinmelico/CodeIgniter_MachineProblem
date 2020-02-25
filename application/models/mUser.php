@@ -75,10 +75,13 @@ class mUser extends CI_Model{
             if($row['strUsername']=="admin"){
                 $_SESSION['isAdmin'] = true;
                 redirect('admin/dashboard');
+            } else {
+                (redirect('user/filmList'));
             }
         }else{
             redirect('user');
         }
     }
+
 }
 ?>

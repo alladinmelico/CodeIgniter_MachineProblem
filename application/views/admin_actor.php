@@ -18,7 +18,7 @@
         <tbody>
             <?php foreach($actors as $row){?>
                     <tr>
-                        <td scope="row"><img src="<?php echo base_url().$row['picture'];?>" alt="" width="100"></td>
+                        <td scope="row"><img src="<?php echo base_url().$row['actor_picture'];?>" alt="" width="100"></td>
                         <td scope="row"><?= $row['lngActorID'];?></td>
                         <td scope="row"><?= $row['strActorFullName'];?></td>
                         <td scope="row"><?= $row['memActorNotes'];?></td>
@@ -26,7 +26,7 @@
                             href="<?= base_url();?>admin/actor/edit/<?= $row['lngActorID'];?>" role="button"><i class="fa fa-edit" aria-hidden="true"></i></a>
                         </td>
                         <td><a name="" id="" class="btn btn-danger" 
-                            href="<?= base_url();?>admin/actor/delete/<?= $row['lngActorID'];?>/<?= $row['picture'];?>" 
+                            href="<?= base_url();?>admin/actor/delete/<?= $row['lngActorID'];?>/<?= $row['actor_picture'];?>" 
                             role="button"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
                     </tr>

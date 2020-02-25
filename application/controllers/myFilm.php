@@ -30,7 +30,7 @@ class User extends CI_Controller{
     function create(){
         if($this->input->post('strUsername')){
             $this->mUser->createUser();
-            redirect('user/','refresh');
+            redirect('myFilm/','refresh');
         } else {
             $data['title'] = "Register";
             $this->load->vars($data);
@@ -69,29 +69,6 @@ class User extends CI_Controller{
         $data['films'] = $this->mFilm->getAllFilms();
         $this->load->vars($data);
         $this->load->view('template');
-    }
-
-    function watch($id){
-        $data['title'] = "Films";
-        $data['main'] = 'film_watch';
-        $data['film'] = $this->mFilm->getFilm($id);
-        $data['review'] = $this->mFilm->getUserRating($id,$_SESSION['userid']);
-        
-        $data['rate'] = $this->mFilm->getRate($id);
-        $this->load->vars($data);
-        $this->load->view('template');
-    }
-
-    function filmReview(){
-        $data['title'] = "Review";
-        if($this->uri->segment(3) == "create"){
-            $this->mFilm->addReview();
-            $this->session->set_flashdata('Success', 'Review Added!');
-        } elseif ($this->uri->segment(3) == "update"){
-            $this->mFilm->updateReview();
-            $this->session->set_flashdata('Success', 'Review Updated!');
-        }
-        redirect('user/filmList');
     }
 }
 ?>

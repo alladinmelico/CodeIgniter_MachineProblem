@@ -139,5 +139,70 @@ class mFilm extends CI_Model{
  
          $this->db->insert('tblFilmTitles',$data);
     }
+
+    function getUserRating($film,$user){
+        $data = array();
+        $this->db->where('lngFilmTitleID',$film);
+        $this->db->where('idUser',$user);
+        $Q = $this->db->get('tblFilmReview');
+
+        if($Q->num_rows() > 0){
+            $data = $Q -> row_array();
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
+    function getRate($id){
+        $data = array();
+        $Q = $this->db->query('CALL getFilmRateAverage(?,@rate)',array($id));
+        // $sql = "SELECT @rate ";
+        // $Q = $this->db->query($sql);
+        // $this->db->select("ROUND(AVG(decDirecting + decWriting + decCinematography + decEditing + decActing + decProdDesign + decSound)/7,2) AS 'rate'");
+        // $this->db->group_by('lngFilmTitleID');
+        // $this->db->having('lngFilmTitleID',$id);
+        // $Q = $this->db->get('tblfilmreview');
+
+        if($Q->num_rows() > 0){
+            $data = $Q->row_array();
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
+    function addReview(){
+        $data = array(
+                'idUser'=>$_POST['idUser'],
+                'lngFilmTitleID'=>$_POST['lngFilmTitleID'],
+                'decDirecting'=>$_POST['decDirecting'],
+                'decWriting'=>$_POST['decWriting'],
+                'decCinematography'=>$_POST['decCinematography'],
+                'decEditing'=>$_POST['decEditing'],
+                'decActing'=>$_POST['decActing'],
+                'decProdDesign'=>$_POST['decProdDesign'],
+                'decSound'=>$_POST['decSound'],
+                'strComment'=>$_POST['strComment'],
+        );
+        $this->db->insert('tblFilmReview',$data);
+    }
+
+    function updateReview(){
+        $data = array(
+                'decDirecting'=>$_POST['decDirecting'],
+                'decWriting'=>$_POST['decWriting'],
+                'decCinematography'=>$_POST['decCinematography'],
+                'decEditing'=>$_POST['decEditing'],
+                'decActing'=>$_POST['decActing'],
+                'decProdDesign'=>$_POST['decProdDesign'],
+                'decSound'=>$_POST['decSound'],
+                'strComment'=>$_POST['strComment'],
+        );
+
+        $this->db->where('idUser',$_POST['idUser']);
+        $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
+        $this->db->update('tblFilmReview',$data);
+    }
 }
 ?>
