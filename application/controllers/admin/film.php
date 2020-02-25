@@ -28,10 +28,24 @@ class Film extends CI_Controller{
         }
     }
 
+    function updateGenre(){
+        if($this->input->post('lngFilmTitleID')){
+            $this->mFilm->updateFilmGenre();
+            redirect('user/viewFilm/'.$_POST['lngFilmTitleID'],'refresh');
+        }
+    }
+
+    function updateCertificate(){
+        if($this->input->post('lngFilmTitleID')){
+            $this->mFilm->updateFilmCertificate();
+            redirect('user/viewFilm/'.$_POST['lngFilmTitleID'],'refresh');
+        }
+    }
+
     function create(){
         if($this->input->post('strFilmTitle')){
             $this->mFilm->createFilm();
-            redirect('admin/film/','refresh');
+            redirect('admin/film','refresh');
         } else {
             $data['title'] = "Add Film";
             $data['main'] = 'admin_film_create';

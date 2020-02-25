@@ -60,5 +60,6 @@ class mProducer extends CI_Model{
  
          $this->db->insert('tblProducers',$data);
     }
+
 }
 ?>

@@ -43,5 +43,24 @@ class Producer extends CI_Controller{
         $this->db->delete('tblProducers');
         redirect('admin/producer/','refresh');
     }
+
+    function addProducer($film){
+        $data = array(
+            'lngFilmTitleID' => $_POST['lngFilmTitleID'],
+            'lngProducerID' => $_POST['lngProducerID']
+         );
+         $this->db->insert('tblFilmTitlesProducers',$data);
+         redirect('user/viewFilm/'.$film,'refresh');
+    }
+
+    function removeProducer($film,$prod){
+        $data = array(
+            'lngFilmTitleID' => $film,
+            'lngProducerID' => $prod
+         );
+         $this->db->where($data);
+         $this->db->delete('tblFilmTitlesProducers');
+         redirect('user/viewFilm/'.$film,'refresh');
+    }
 }
 ?>

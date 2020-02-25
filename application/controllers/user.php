@@ -56,9 +56,26 @@ class User extends CI_Controller{
         $data['actors'] = $this->mActor->getAllActors();
         $data['genres'] = $this->mGenre->getAllGenres();
         $data['certificates'] = $this->mFilm->getCertificates();
-        $data['filmProducers'] = $this->mFilm->viewFilmProducers($filmID);
+        $data['producers'] = $this->mFilm->viewFilmProducers($filmID);
+        $data['filmProducers'] = $this->mFilm->getAllProducers();
         $data['roleTypes'] = $this->mFilm->roleTypes();
-        $data['film'] = $this->mFilm->selectFilm($filmID);
+        $data['film'] = $this->mFilm->getFilm($filmID);
+        $data['filmActors'] = $this->mFilm->getFilmActors($filmID);
+        $this->load->vars($data);
+        $this->load->view('dashboard');
+    }
+
+    function filmDetail($filmID){
+        $data['title'] = "Films";
+        $data['main'] = 'film_detail';
+        $data['actors'] = $this->mActor->getAllActors();
+        $data['genres'] = $this->mGenre->getAllGenres();
+        $data['certificates'] = $this->mFilm->getCertificates();
+        $data['producers'] = $this->mFilm->viewFilmProducers($filmID);
+        $data['filmProducers'] = $this->mFilm->getAllProducers();
+        $data['roleTypes'] = $this->mFilm->roleTypes();
+        $data['film'] = $this->mFilm->getFilm($filmID);
+        $data['filmActors'] = $this->mFilm->getFilmActors($filmID);
         $this->load->vars($data);
         $this->load->view('template');
     }
@@ -66,7 +83,7 @@ class User extends CI_Controller{
     function filmList(){
         $data['title'] = "Films";
         $data['main'] = 'film_list';
-        $data['films'] = $this->mFilm->getAllFilms();
+        $data['films'] = $this->mFilm->getFilmsDetails();
         $this->load->vars($data);
         $this->load->view('template');
     }

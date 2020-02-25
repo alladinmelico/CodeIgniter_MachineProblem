@@ -28,7 +28,7 @@
                     <tr>
                         <td scope="row"><img src="<?php echo base_url().$row['picture'];?>" alt="" width="100"></td>
                         <td scope="row"><?= $row['lngFilmTitleID'];?></td>
-                        <td scope="row"><?= $row['strFilmTitle'];?></td>
+                        <td scope="row"><a href="<?= base_url()?>user/viewFilm/<?= $row['lngFilmTitleID'];?>"><?= $row['strFilmTitle'];?></a></td>
                         <td scope="row"><?= $row['memFilmStory'];?></td>
                         <td scope="row"><?= $row['dtmFilmReleaseDate'];?></td>
                         <td scope="row"><?= $row['intFilmDuration'];?></td>

@@ -44,6 +44,26 @@ class Actor extends CI_Controller{
         $this->db->delete('tblActors');
         redirect('admin/actor/','refresh');
     }
+
+    function role($film,$actor,$action){
+        if($this->input->post('lngFilmTitleID') || isset($film)){
+            if($action=="CREATE"){
+                $this->mActor->createRole();
+                redirect('user/viewFilm/'.$film,'refresh');
+
+            } elseif($action=="EDIT"){
+                $this->mActor->updateRole($film,$actor);
+                redirect('user/viewFilm/'.$film,'refresh');
+
+            } elseif ($action=="REMOVE"){
+                $this->db->where('lngFilmTitleID',$film);
+                $this->db->where('lngActorID',$actor);
+                $this->db->delete('tblFilmsActorRoles');
+                redirect('user/viewFilm/'.$film,'refresh');
+            } else redirect('user/viewFilm/'.$film,'refresh');
+            
+        }
+    }
 }
 
 ?>

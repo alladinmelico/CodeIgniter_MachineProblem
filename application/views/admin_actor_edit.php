@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="h1"><?= $title;?></h1> 
     <div class="row justify-content-center">
-        <img src="<?= base_url().$actor['picture']?>" alt="" width="300">
+        <img src="<?= base_url().$actor['actor_picture']?>" alt="" width="300">
     </div>
     <div class="row">
         <div class="col-sm-8">

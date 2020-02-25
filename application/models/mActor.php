@@ -64,7 +64,7 @@ class mActor extends CI_Model{
 
         $image = $this->upload->data();
         if($image['file_name']){
-            $data['picture'] = "images/".$image['file_name'];
+            $data['actor_picture'] = "images/".$image['file_name'];
         }
 
         $this->db->where('lngActorID',$_POST['lngActorID']);
@@ -95,10 +95,36 @@ class mActor extends CI_Model{
  
          $image = $this->upload->data();
          if($image['file_name']){
-             $data['picture'] = "images/".$image['file_name'];
+             $data['actor_picture'] = "images/".$image['file_name'];
          }
  
          $this->db->insert('tblActors',$data);
+    }
+
+    function createRole(){
+        $data = array(
+            'strCharacterName' => $_POST['strCharacterName'],
+            'memCharaterDescription' => $_POST['memCharaterDescription'],
+            'lngActorID' => $_POST['lngActorID'],
+            'lngRoleTypeID' => $_POST['lngRoleTypeID'],
+            'lngFilmTitleID' => $_POST['lngFilmTitleID']
+         );
+
+         $this->db->insert('tblFilmsActorRoles',$data);
+    }
+
+    function updateRole($film,$actor){
+        $data = array(
+            'strCharacterName' => $_POST['strCharacterName'],
+            'memCharaterDescription' => $_POST['memCharaterDescription'],
+            'lngActorID' => $_POST['lngActorID'],
+            'lngRoleTypeID' => $_POST['lngRoleTypeID'],
+            'lngFilmTitleID' => $_POST['lngFilmTitleID']
+         );
+
+         $this->db->where('lngActorID',$actor);
+         $this->db->where('lngFilmTitleID',$film);
+         $this->db->update('tblFilmsActorRoles',$data);
     }
 }
 ?>

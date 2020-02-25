@@ -25,6 +25,46 @@ class mFilm extends CI_Model{
         return $data;
     }
 
+    function getFilmsDetails(){
+        $data = array();
+        $Q = $this->db->get('viewFilmDetails');
+
+        if ($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
+    function getFilmActor($id){
+        $data = array();
+        $Q = $this->db->get_where('viewFilmActor',array('lngFilmTitleID' => $id),1);
+
+        if ($Q->num_rows() > 0){
+            $data = $Q -> row_array();
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
+    function getFilmActors($id){
+        $data = array();
+        $Q = $this->db->get_where('viewFilmActor',array('lngFilmTitleID' => $id));
+
+        if ($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
     function getFilm($id){
         $data = array();
         $film = array('lngFilmTitleID' => $id);
@@ -80,7 +120,7 @@ class mFilm extends CI_Model{
         );
 
         $config['upload_path'] = './images/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
         $config['max_size'] = '500';
         $config['remove_spaces'] = false;
         $config['overwrite'] = false;
@@ -104,6 +144,24 @@ class mFilm extends CI_Model{
         $this->db->update('tblFilmTitles',$data);
     }
 
+    function updateFilmGenre(){
+        $data = array(
+            'lngGenreID' => $_POST['lngGenreID']
+         );
+ 
+         $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
+         $this->db->update('tblFilmTitles',$data);
+    }
+
+    function updateFilmCertificate(){
+        $data = array(
+            'lngCertificateID' => $_POST['lngCertificateID']
+         );
+ 
+         $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
+         $this->db->update('tblFilmTitles',$data);
+    }
+
     function createFilm(){
         $data = array(
             'strFilmTitle' => $_POST['strFilmTitle'],
@@ -117,7 +175,7 @@ class mFilm extends CI_Model{
          );
  
          $config['upload_path'] = './images/';
-         $config['allowed_types'] = 'gif|jpg|png';
+         $config['allowed_types'] = 'gif|jpg|png|jpeg   ';
          $config['max_size'] = '500';
          $config['remove_spaces'] = false;
          $config['overwrite'] = false;
@@ -203,6 +261,63 @@ class mFilm extends CI_Model{
         $this->db->where('idUser',$_POST['idUser']);
         $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
         $this->db->update('tblFilmReview',$data);
+    }
+
+    function viewFilmProducers($id){
+        $data = array();
+        $film = array('lngFilmTitleID' => $id);
+        $Q = $this->db->get_where('viewFilmProducers',$film);
+
+        if($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
+    function roleTypes(){
+        $data = array();
+        $Q = $this->db->get('tblRoleTypes');
+
+        if ($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+
+        $Q->free_result();
+        return $data;
+    }
+
+    function getPic($id){
+        $data = array();
+
+        $this->db->select('picture');
+        $Q = $this->db->get_where('tblFilmTitles',array('lngFilmTitleID' => $id));
+
+        if($Q->num_rows() > 0){
+            foreach( $Q->result_array() as $row){
+                $data[] = $row;
+
+            }
+        }
+    }
+
+    function getAllProducers(){
+        $data = array();
+        $Q = $this->db->get('tblProducers');
+
+        if ($Q->num_rows() > 0){
+            foreach($Q->result_array() as $row){
+                $data[] = $row;
+            }
+        }
+
+        $Q->free_result();
+        return $data;
     }
 }
 ?>

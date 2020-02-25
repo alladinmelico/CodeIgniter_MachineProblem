@@ -6,3 +6,24 @@ genre.lngGenreID,cert.strCertificate,cert.lngCertificateID FROM tblfilmtitles fi
 INNER JOIN tblfilmgenres genre ON genre.lngGenreID = film.lngGenreID
 INNER JOIN tblfilmcertificates cert ON cert.lngCertificateID = film.lngCertificateID
 
+view filmDetails
+CREATE VIEW viewFilmDetails AS 
+SELECT GROUP_CONCAT(actor.strActorFullName) as 'actors',GROUP_CONCAT(prod.strProducerName) as 'producers',GROUP_CONCAT(genre.strGenre) as 'genres',film.strFilmTitle,film.memFilmStory,film.dtmFilmReleaseDate,film.intFilmDuration,film.memFilmAdditionalInfo,film.picture, cert.strCertificate,actor.actor_picture,film.lngFilmTitleID FROM tblfilmtitles film
+INNER JOIN tblfilmsactorroles far ON far.lngFilmTitleID = film.lngFilmTitleID
+INNER JOIN tblactors actor ON actor.lngActorID = far.lngActorID
+INNER JOIN tblfilmtitlesproducers ftp ON ftp.lngFilmTitleID = film.lngFilmTitleID
+INNER JOIN tblproducers prod ON prod.lngProducerID = ftp.lngProducerID
+INNER JOIN tblfilmgenres genre ON genre.lngGenreID = film.lngGenreID
+INNER JOIN tblfilmcertificates cert ON cert.lngCertificateID = film.lngCertificateID
+
+viewFIlmACtor
+CREATE VIEW viewFilmActor AS
+SELECT actor.lngActorID,actor.strActorFullName,actor.actor_picture,far.strCharacterName,
+far.memCharaterDescription,role.lngRoleTypeID,role.strRoleType,film.strFilmTitle,
+film.memFilmStory,film.memFilmAdditionalInfo,film.dtmFilmReleaseDate,film.intFilmDuration,
+film.picture,film.lngFilmTitleID,genre.strGenre,cert.strCertificate FROM tblfilmtitles film
+INNER JOIN tblfilmsactorroles far ON far.lngFilmTitleID = film.lngFilmTitleID
+INNER JOIN tblactors actor ON actor.lngActorID = far.lngActorID
+INNER JOIN tblroletypes role ON role.lngRoleTypeID = far.lngRoleTypeID
+INNER JOIN tblfilmgenres genre ON genre.lngGenreID = film.lngGenreID
+INNER JOIN tblfilmcertificates cert ON cert.lngCertificateID = film.lngCertificateID

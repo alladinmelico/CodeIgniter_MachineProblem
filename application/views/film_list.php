@@ -8,40 +8,52 @@
     }
 </style>
 <table class="table table-striped table-inverse text-light mt-5">
-    <thead class="thead-inverse text-dim">
-        <tr>
-            <th></th>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Story</th>
-            <th>Release Date</th>
-            <th>Duration</th>
-            <th>Additional Info</th>
-            <th>Genre</th>
-            <th>Certificate</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
         <tbody>
             <?php foreach($films as $row){?>
-                    <tr>
-                        <td scope="row"><img src="<?php echo base_url().$row['picture'];?>" alt="" width="100"></td>
-                        <td scope="row"><?= $row['lngFilmTitleID'];?></td>
-                        <td scope="row"><?= $row['strFilmTitle'];?></td>
-                        <td scope="row"><?= $row['memFilmStory'];?></td>
-                        <td scope="row"><?= $row['dtmFilmReleaseDate'];?></td>
-                        <td scope="row"><?= $row['intFilmDuration'];?></td>
-                        <td scope="row"><?= $row['memFilmAdditionalInfo'];?></td>
-                        <td scope="row"><?= $row['strGenre'];?></td>
-                        <td scope="row"><?= $row['strCertificate'];?></td>
-                        <td scope="row jumbotron">
-                            <span class="display-3 text-warning"><?= $row['rate'];?></span><span class="display-4 text-dim">/10</span>
-                        </td>
-                        <td  scope="row jumbotron"><a name="" id="" class="btn btn-danger" 
-                            href="<?= base_url();?>user/watch/<?= $row['lngFilmTitleID'];?>" 
-                            role="button"><i class="fa fa-play-circle display-4" aria-hidden="true"></i></a>
-                        </td>
+                    <tr style="color:white;" ">
+                        <td>
+                        <div class="container-fluid mx-auto " style="width: 40rem;margin-top:5rem;">
+                            <div class="card mb-3 box shadow p-2 cardBg" style="max-width: 40rem; background-image: url('images\5c289afb9a157510e6893a57_29. Pale Cornflower Blue.jpg');" >
+                                <div class="row no-gutters ">
+                                    <div class="col-md-4 ">
+                                        <img src="<?php echo base_url().$row['picture'];?>?>" class="card-img rounded-lg shadow p-2" alt="" style="margin-left:0.1rem;">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card-body">
+                                            <h5 class="card-title font-weight-bold text-center mb-5"><?php echo $row['strFilmTitle'] ?>
+                                            <a href="<?= base_url()?>user/filmDetail/<?= $row['lngFilmTitleID'];?>"
+                                                class="float-right "><i class="fas fa-arrow-right"></i></h5>
+                                            <p class="card-text"><strong>Cast: </strong><?php echo $row['actors']?></p>
+                                            <p class="card-text"><strong>Genre:</strong><?php echo $row['genres']?></p>
+                                            <?php
+                                                $tempProds = explode("," ,$row['producers']);
+                                                $tempProdUniq = array_unique($tempProds);
+                                                $tempString = "";
+                                                    foreach($tempProdUniq AS $tempProdData)
+                                                    {
+                                                    $tempString .= (", ". $tempProdData);
+                                                    }
+                                                    $tempString = substr($tempString, 1);
+                                            ?>
+                                            <p class="card-text"><strong>Producers:</strong><?php echo $tempString;?></p>
+                                            <strong><p>
+                                            <?php echo intdiv($row['intFilmDuration'],60)?>hr 
+                                            <?php echo fmod($row['intFilmDuration'],60)?> mins</p></strong>
+                                            <p class="card-text"><small class="text-muted">
+                                            <div class="text-truncate wrap bd-highlight" style="max-width: 55ch;">
+                                                <?php echo $row['memFilmStory']?>
+                                            </div>
+                                            <!-- <a href='script/editFilm.php?lngFilmTitleID="<?php echo ($row['lngFilmTitleID']);?>"'><i>read more</i></a> -->
+                                            <button type="button" class="btn btn-sm btn-info shadow p-2" data-toggle="popover" title="Film Story"
+                                            data-content="<?php echo $row['memFilmStory'];?>">read more</button>
+                                            </small></p>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
                     </tr>
                 <?php }?>
         </tbody>
