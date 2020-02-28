@@ -55,12 +55,12 @@ small{
             </div>
 
             <h2 class="text-left mb-5">
-            <!-- TODO: delete function not working -->
                 Rate <?php 
                         if($review != null){ 
                             echo form_open('user/filmReview/delete');
                             echo form_hidden('idUser',$_SESSION['userid']);
-                            echo form_hidden('lngFilmTitleID',$film['lngFilmTitleID']);
+                            echo form_hidden('lngFilmTitleID',$this->uri->segment(3)
+                            );
                             $data = array('name'=>'rate',
                                 'type' => 'submit',
                                 'id'=>'',

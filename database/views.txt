@@ -8,7 +8,10 @@ INNER JOIN tblfilmcertificates cert ON cert.lngCertificateID = film.lngCertifica
 
 view filmDetails
 CREATE VIEW viewFilmDetails AS 
-SELECT GROUP_CONCAT(actor.strActorFullName) as 'actors',GROUP_CONCAT(prod.strProducerName) AS 'producers',GROUP_CONCAT(genre.strGenre) as 'genres',film.strFilmTitle,film.memFilmStory,film.dtmFilmReleaseDate,film.intFilmDuration,film.memFilmAdditionalInfo,film.picture, cert.strCertificate,actor.actor_picture,film.lngFilmTitleID FROM tblfilmtitles film
+SELECT GROUP_CONCAT(actor.strActorFullName) as 'actors',GROUP_CONCAT(prod.strProducerName) 
+AS 'producers',GROUP_CONCAT(genre.strGenre) as 'genres',film.strFilmTitle,film.memFilmStory,
+film.dtmFilmReleaseDate,film.intFilmDuration,film.memFilmAdditionalInfo,film.picture,
+ cert.strCertificate,actor.actor_picture,film.lngFilmTitleID FROM tblfilmtitles film
 INNER JOIN tblfilmsactorroles far ON far.lngFilmTitleID = film.lngFilmTitleID
 INNER JOIN tblactors actor ON actor.lngActorID = far.lngActorID
 INNER JOIN tblfilmtitlesproducers ftp ON ftp.lngFilmTitleID = film.lngFilmTitleID
@@ -33,3 +36,17 @@ CREATE VIEW viewMostReviewed AS
 SELECT title.strFilmTitle,COUNT(title.lngFilmTitleID) AS 'review' FROM tblfilmreview rev
 INNER JOIN tblfilmtitles title ON title.lngFilmTitleID = rev.lngFilmTitleID
 GROUP BY title.lngFilmTitleID
+
+CREATE VIEW viewReviewAvg AS 
+SELECT film.strFilmTitle,AVG(rev.decDirecting) AS 'directing',AVG(rev.decWriting) 
+AS 'writing',AVG(rev.decCinematography) AS 'cinematography',AVG(rev.decEditing) 
+AS 'editing',AVG(rev.decActing) AS 'acting',AVG(rev.decProdDesign) AS 'proddesign',
+AVG(rev.decSound) AS 'sound',AVG(rev.decDirecting+rev.decWriting+rev.decCinematography+
+rev.decEditing+rev.decActing+rev.decProdDesign+rev.decSound)/7 AS 'rate' FROM tblfilmtitles film
+INNER JOIN tblfilmreview rev ON rev.lngFilmTitleID = film.lngFilmTitleID
+GROUP BY film.lngFilmTitleID
+ORDER BY rate DESC
+
+CREATE VIEW viewNumOfRate AS
+SELECT COUNT(rev.lngFilmTitleID) AS 'count',rev.dtmTimeStamp FROM tblfilmreview rev
+GROUP BY rev.dtmTimeStamp

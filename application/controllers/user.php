@@ -107,7 +107,7 @@ class User extends CI_Controller{
         } elseif ($this->uri->segment(3) == "update"){
             $this->mFilm->updateReview();
             $this->session->set_flashdata('Success', 'Review Updated!');
-        } elseif ($this->uri->segment(3) == "update"){
+        } elseif ($this->uri->segment(3) == "delete"){
             $this->db->where('idUser',$_POST['idUser']);
             $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
             $this->db->delete('tblFilmReview');

@@ -314,7 +314,52 @@ class mFilm extends CI_Model{
     }
 
     function viewMostReviewed(){
+        $data = array();
+
+        $Q = $this->db->get('viewMostReviewed');
+
+        if($Q->num_rows() > 0){
+            foreach($Q->result_array() AS $row){
+                $data[] = array($row['strFilmTitle'],$row['review']);
+            }   
+        }
+        $Q->free_result();
         
+        return $data;
+    }
+
+    function viewReviewAvg(){
+        $data = array();
+
+        $Q = $this->db->get('viewReviewAvg');
+
+        if($Q->num_rows() > 0){
+            foreach($Q->result_array() AS $row){
+                $data[] = array(
+                    $row['strFilmTitle'],$row['directing'],$row['writing'],
+                    $row['cinematography'],$row['editing'],
+                    $row['acting'],$row['proddesign'],$row['sound']
+                );
+            }   
+        }
+        $Q->free_result();
+        
+        return $data;
+    }
+
+    function viewNumOfRate(){
+        $data = array();
+
+        $Q = $this->db->get('viewNumOfRate');
+
+        if($Q->num_rows() > 0){
+            foreach($Q->result_array() AS $row){
+                $data[] = array($row['dtmTimeStamp'],$row['count']);
+            }   
+        }
+        $Q->free_result();
+        
+        return $data;
     }
 }
 ?>

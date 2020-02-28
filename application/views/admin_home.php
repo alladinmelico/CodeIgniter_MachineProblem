@@ -3,30 +3,84 @@
         color: rgb(43, 155, 127);
     }
 </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(drawChart);
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawPieChart);
+        google.charts.setOnLoadCallback(drawBarChart);
+        google.charts.setOnLoadCallback(drawLineChart);
 
-    function drawChart() {
-      // Define the chart to be drawn.
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Element');
-      data.addColumn('number', 'Percentage');
-      data.addRows([
-        ['Nitrogen', 0.78],
-        ['Oxygen', 0.21],
-        ['Other', 0.01]
-      ]);
 
-      // Instantiate and draw the chart.
-      var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
-      chart.draw(data, null);
-    }
+        function drawLineChart(){
+            var data = google.visualization.arrayToDataTable([
+                ['date','count'],
+                <?php
+                    foreach($numOfRate AS $row){ ?>
+                        ['<?= $row[0];?>',<?= $row[1];?>],
+                <?php    }
+                ?>
+            ]);
+            var options = {
+                title: 'Numbers of Ratings per date',
+                hAxis: {
+                title: 'Date'
+                },
+                vAxis: {
+                title: 'Number of Rates '
+                }
+            };
+            var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+            chart.draw(data, options);
+        }
+
+        function drawBarChart(){
+            var data = google.visualization.arrayToDataTable([
+                ['Film','Directing', 'Writing', 'Cinematography', 'Editing',
+                'Acting', 'Production Design','Sound'],
+                <?php
+                    foreach($reviewAvg AS $row){ ?>
+                        ['<?= $row[0];?>',<?= $row[1];?>,<?= $row[2];?>,<?= $row[3];?>,<?= $row[4];?>,<?= $row[5];?>,<?= $row[6];?>,<?= $row[7];?>],
+                <?php    }
+                ?>
+            ]);
+            var options = {
+                title: 'Film Ratings by Criteria',
+                height: 400,
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true,
+                backgroundColor: 'none'
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById('barchart'));
+            chart.draw(data, options);
+        }
+
+        function drawPieChart() {
+            var data = new google.visualization.arrayToDataTable([
+                ['Films','Reviews'],
+                <?php
+                    foreach($mostReview AS $row){
+                        echo "['".$row[0]."',".$row[1]."],";
+                    }
+                ?>
+            ]);
+            var options = {
+                title: 'Most Reviewed Films'
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
     </script>
 
 <div class="container">
-    <div class="row" id="myPieChart">
-
+    <h1 class="h1"><i class="fas fa-chart-line mr-3"></i>Analytics</h1>
+    <div class="row card mb-5" id="barchart" >
+    </div>
+    <div class="row">
+        <div class="col rounded-lg bg-white mr-5" id="piechart" >
+        </div>
+        <div class="col rounded-lg bg-white" id="linechart">
+        </div>
     </div>
     <div class="row">
         <div class="col-8 py-3 px-lg-5">
