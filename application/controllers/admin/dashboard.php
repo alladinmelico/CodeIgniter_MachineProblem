@@ -10,6 +10,9 @@ class Dashboard extends CI_Controller{
     function index(){
         $data['title'] = "Admin Dashboard";
         $data['main'] = 'admin_home';
+        $data['films'] = $this->mFilm->getAllFilms();
+        $data['genres'] = $this->mGenre->getAllGenres();
+        $data['producers'] = $this->mProducer->getAllProducers();
         $this->load->vars($data);
         $this->load->view('dashboard');
     }
@@ -19,6 +22,11 @@ class Dashboard extends CI_Controller{
         unset($_SESSION['username']);
         unset($_SESSION['isAdmin']);
         redirect('user','refresh');
+    }
+
+    function getMostReviewed(){
+        $data['mostReview'] = $this->mFilm->viewMostReviewed();
+        $this->load->vars($data);
     }
 }
 ?>

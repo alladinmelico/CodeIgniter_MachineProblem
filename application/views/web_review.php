@@ -39,28 +39,12 @@ small{
 
 </style>
 <div class="container">
-    <div class="row justify-content-md-center mb-5">
-        <div class="col-4">
-            <?php if (!isset($rate['rate'])) $rate['rate']="Rating Not Available...";?>
-            <h2 class="text-warning"><?= $rate['rate']; ?></h2>
-            <h3 class="text-center">
-            <?=$film['strFilmTitle']?></h3>
-            <p class="text-justify text-white-50"><?=$film['memFilmStory'] ?></p>
-            <h4><?=$film['dtmFilmReleaseDate'] ?></h4>
-            </div>
-                <div class="col-8">
-                    <?= $film['strSource'];?>
-                    
-                </div>
-            </div>
-
             <h2 class="text-left mb-5">
-            <!-- TODO: delete function not working -->
                 Rate <?php 
                         if($review != null){ 
-                            echo form_open('user/filmReview/delete');
-                            echo form_hidden('idUser',$_SESSION['userid']);
-                            echo form_hidden('lngFilmTitleID',$film['lngFilmTitleID']);
+                            echo form_open('user/webReview/delete');
+                            echo form_hidden('idWebReview',$review['idWebReview']);
+                            echo form_hidden('tblUser_idUser',$_SESSION['userid']);
                             $data = array('name'=>'rate',
                                 'type' => 'submit',
                                 'id'=>'',
@@ -76,32 +60,28 @@ small{
                     $action = "update";
                     if($review == null){
                         $action = "create";
-                        $review['decDirecting']=0;
-                        $review['decWriting']=0;
-                        $review['decCinematography']=0;
-                        $review['decEditing']=0;
-                        $review['decActing']=0;
-                        $review['decProdDesign']=0;
-                        $review['decSound']=0;
-                        $review['strComment']='';
+                        $review['decAccuracy']=0;
+                        $review['decAuthority']=0;
+                        $review['decObjectivity']=0;
+                        $review['decCurrency']=0;
+                        $review['decCoverage']=0;
+                        $review['strComment']=0;
                     } 
-                    echo form_open('user/filmReview/'.$action);
+                    echo form_open('user/webReview/'.$action);
 
-                    echo form_hidden('idUser',$_SESSION['userid']);  
-                    echo form_hidden('lngFilmTitleID',$this->uri->segment(3))
+                    echo form_hidden('idWebReview',$review['idWebReview']);
+                    echo form_hidden('tblUser_idUser',$_SESSION['userid']); 
                 ?>
                 
                 <div class="container">
-                    <label for="directing" class="h3 text-info">Directing:</label>
+                    <label for="directing" class="h3 text-info">Accuracy:</label>
                     <span id="directing_value" class="text-warning font-weight-bold h5 float-right display-4"><?=$review['decDirecting']?></span>
                 </div>
                     <div class="slidecontainer bg-transparent mb-5">
-                        <input name="decDirecting" type="range" min="1" max="10" value="<?=$review['decDirecting']?>" step="0.1" class="slider" 
+                        <input name="decAccuracy" type="range" min="1" max="10" value="<?=$review['decAccuracy']?>" step="0.1" class="slider" 
                         id="directing" onchange="show_value(this.value,'directing_value');overAll()">
-                        <small>The directing of cinematography includes both the camera shots and the 
-                            lighting to obtain both a particular type of effect and mood. 
-                            The director also has control over the editing to create the pace, 
-                            rhythm, coherence, story, and character development they and the producer want.
+                        <small>There are few standards to verify the accuracy of information on the web. It is the responsibility
+of the reader to assess the information presented.
                         </small>
                     </div>
 

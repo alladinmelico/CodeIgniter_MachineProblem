@@ -13,6 +13,11 @@
     <script defer src="<?= base_url()?>js/all.js"></script>
     <link href="<?= base_url()?>css/solid.css" rel="stylesheet">
     <script defer src="<?= base_url()?>js/solid.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load('current', {packages: ['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    </script>
   </head>
   <body>
       <div class="container-fluid ">

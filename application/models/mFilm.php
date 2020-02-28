@@ -215,13 +215,6 @@ class mFilm extends CI_Model{
     function getRate($id){
         $data = array();
         $Q = $this->db->query('CALL getFilmRateAverage(?,@rate)',array($id));
-        // $sql = "SELECT @rate ";
-        // $Q = $this->db->query($sql);
-        // $this->db->select("ROUND(AVG(decDirecting + decWriting + decCinematography + decEditing + decActing + decProdDesign + decSound)/7,2) AS 'rate'");
-        // $this->db->group_by('lngFilmTitleID');
-        // $this->db->having('lngFilmTitleID',$id);
-        // $Q = $this->db->get('tblfilmreview');
-
         if($Q->num_rows() > 0){
             $data = $Q->row_array();
         }
@@ -318,6 +311,10 @@ class mFilm extends CI_Model{
 
         $Q->free_result();
         return $data;
+    }
+
+    function viewMostReviewed(){
+        
     }
 }
 ?>

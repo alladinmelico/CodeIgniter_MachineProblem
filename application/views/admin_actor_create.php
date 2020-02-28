@@ -3,6 +3,7 @@
         margin-top: 2em;
     }
 </style>
+
 <div class="container">
     <h1 class="h1"><?= $title;?></h1> 
     <div class="row">

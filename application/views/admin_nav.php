@@ -10,7 +10,7 @@
 </style>
 
 <nav class="navbar navbar-expand-sm navbar-light container-fluid ">
-    <a class="navbar-brand text-light" href="#">Dashboard</a>
+    <a class="navbar-brand text-light" href="<?= base_url()?>admin/dashboard">Dashboard</a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
         aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

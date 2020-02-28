@@ -83,5 +83,23 @@ class mUser extends CI_Model{
         }
     }
 
+    function createWebReview(){
+        $data = array(
+            'tblUser_idUser' => $_POST['tblUser_idUser'],
+            'decAccuracy	' => $_POST['decAccuracy'],
+            'decAuthority' => $_POST['decAuthority'],
+            'decObjectivity' => $_POST['decObjectivity'],
+            'decCurrency' => $_POST['decCurrency'],
+            'decCoverage' => $_POST['decCoverage'],
+            'strComment' => $_POST['strComment']
+         );
+ 
+         $this->db->insert('tblWebReview',$data);
+    }
+
+    function updateWebReview(){
+
+    }
+
 }
 ?>

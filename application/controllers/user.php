@@ -107,8 +107,37 @@ class User extends CI_Controller{
         } elseif ($this->uri->segment(3) == "update"){
             $this->mFilm->updateReview();
             $this->session->set_flashdata('Success', 'Review Updated!');
+        } elseif ($this->uri->segment(3) == "update"){
+            $this->db->where('idUser',$_POST['idUser']);
+            $this->db->where('lngFilmTitleID',$_POST['lngFilmTitleID']);
+            $this->db->delete('tblFilmReview');
+            $this->session->set_flashdata('Success', 'Review Deleted!');
         }
-        redirect('user/filmList');
+        redirect('user/watch/'.$_POST['lngFilmTitleID'],'refresh');
+    }
+
+    function webReview(){
+        $data['title'] = "Site Review";
+        if($this->input->post('decAccuracy')){
+            if($this->uri->segment(3) == "create"){
+            $this->mFilm->addWebReview();
+            $this->session->set_flashdata('Success', 'Review Added!');
+            } elseif ($this->uri->segment(3) == "update"){
+                $this->mFilm->updateWebReview();
+                $this->session->set_flashdata('Success', 'Review Updated!');
+            } elseif ($this->uri->segment(3) == "update"){
+                $this->db->where('tblUser_idUser',$_POST['idUser']);
+                $this->db->delete('tblWebReview');
+                $this->session->set_flashdata('Success', 'Review Deleted!');
+            }
+            redirect('user/watch/'.$_POST['lngFilmTitleID'],'refresh');
+        } 
+
+        $data['main'] = 'web_review';
+        $data['review'] = $this->mUser->getReview();
+        $this->load->vars($data);
+        $this->load->view('template');
+        
     }
 }
 ?>

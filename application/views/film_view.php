@@ -355,7 +355,7 @@ if (isset($lngActorID))
               </button>
           </div>
           <div class="modal-body">
-              <form action="<?= base_url()?>admin/actor/role/<?= $lngFilmTitleID?>/<?= $lngActorID?>/CREATE" method="POST">
+              <form action="<?= base_url()?>admin/actor/role/<?= $lngFilmTitleID?>/0/CREATE" method="POST">
                     <input type="hidden" name="pic" value="<?php echo $pic; ?>">
                     <input type="hidden" name="lngFilmTitleID" value="<?php echo $lngFilmTitleID?>">
                     <label>Actor</label>
