@@ -16,7 +16,7 @@
                                     'type' => 'text',
                                     'id'=>'picture',
                                     'class'=>'form-control',
-                                    'rules'=>'required');
+                                    'required'=>'required');
                     echo form_label('Upload');
                     echo form_upload($data);
 
@@ -24,14 +24,16 @@
                                     'type' => 'text',
                                     'id'=>'strActorFullName',
                                     'size'=>25,
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Name');
                     echo form_input($data);
 
                     $data = array('name'=>'memActorNotes',
                                     'type' => 'text',
                                     'id'=>'memActorNotes',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Notes');
                     echo form_textarea($data);
                     $data = array('name'=>'createActor',

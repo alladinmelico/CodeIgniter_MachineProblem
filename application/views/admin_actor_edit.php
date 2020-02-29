@@ -39,6 +39,7 @@
                     echo form_label('Notes');
                     echo form_textarea($data);
                     echo form_hidden('lngActorID',$actor['lngActorID']);
+                    echo form_hidden('oldPicture',$actor['actor_picture']);
                     $data = array('name'=>'editActor',
                                     'type' => 'submit',
                                     'id'=>'',

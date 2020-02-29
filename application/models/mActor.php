@@ -46,25 +46,29 @@ class mActor extends CI_Model{
            'memActorNotes' => $_POST['memActorNotes']
         );
 
-        $config['upload_path'] = './images/';
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['max_size'] = '500';
-        $config['remove_spaces'] = false;
-        $config['overwrite'] = false;
-        $config['max_width'] = '0';
-        $config['max_height'] = '0';
+        if(isset($_FILES['picture']['name']) && !empty($_FILES['picture']['tmp_name'])){
+            $config['upload_path'] = './images/';
+            $config['allowed_types'] = 'gif|jpg|png';
+            $config['max_size'] = '500';
+            $config['remove_spaces'] = false;
+            $config['overwrite'] = false;
+            $config['max_width'] = '0';
+            $config['max_height'] = '0';
 
-        $this->load->library('upload',$config);
+            $this->load->library('upload',$config);
 
-        
-        if(! $this->upload->do_upload('picture')){
-            $this->upload->display_errors();
-            exit();
-        }
+            
+            if(! $this->upload->do_upload('picture')){
+                $this->upload->display_errors();
+                exit();
+            }
 
-        $image = $this->upload->data();
-        if($image['file_name']){
-            $data['actor_picture'] = "images/".$image['file_name'];
+            $image = $this->upload->data();
+            if($image['file_name']){
+                $data['actor_picture'] = "images/".$image['file_name'];
+            }
+        } else{
+            $data['actor_picture'] = $_POST['oldPicture'];
         }
 
         $this->db->where('lngActorID',$_POST['lngActorID']);

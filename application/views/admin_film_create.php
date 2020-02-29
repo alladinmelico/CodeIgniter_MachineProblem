@@ -14,7 +14,8 @@
                     $data = array('name'=>'picture',
                                     'type' => 'text',
                                     'id'=>'picture',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Upload');
                     echo form_upload($data);
 
@@ -22,42 +23,48 @@
                                     'type' => 'text',
                                     'id'=>'strFilmTitle',
                                     'size'=>25,
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Title');
                     echo form_input($data);
 
                     $data = array('name'=>'memFilmStory',
                                     'type' => 'text',
                                     'id'=>'memFilmStory',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Story');
                     echo form_textarea($data);
 
                     $data = array('name'=>'dtmFilmReleaseDate',
                                     'type' => 'date',
                                     'id'=>'dtmFilmReleaseDate',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Release Date');
                     echo form_input($data);
 
                     $data = array('name'=>'intFilmDuration',
                                     'type' => 'number',
                                     'id'=>'intFilmDuration',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Duration (minutes)');
                     echo form_input($data);
 
                     $data = array('name'=>'memFilmAdditionalInfo',
                                     'type' => 'text',
                                     'id'=>'memFilmAdditionalInfo',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Additional Information');
                     echo form_input($data);
 
                     $data = array('name'=>'strSource',
                                     'type' => 'text',
                                     'id'=>'strSource',
-                                    'class'=>'form-control');
+                                    'class'=>'form-control',
+                                    'required'=>'required');
                     echo form_label('Source');
                     echo form_input($data);
                 

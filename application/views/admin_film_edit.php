@@ -19,9 +19,10 @@
                                     'id'=>'picture',
                                     'class'=>'form-control',
                                     'rules'=>'required');
+                                    
                     echo form_label('Upload');
                     echo form_upload($data);
-
+                    
                     $data = array('name'=>'strFilmTitle',
                                     'type' => 'text',
                                     'id'=>'strFilmTitle',
@@ -100,11 +101,13 @@
     <div class="row justify-content-center">
         <?php
             echo form_hidden('lngFilmTitleID',$film['lngFilmTitleID']);
+            echo form_hidden('oldPicture',$film['picture']);
             $data = array('name'=>'editFilm',
                             'type' => 'submit',
                             'id'=>'',
                             'value'=>'Save',
                             'class'=>'btn btn-success mt-5');
+
             echo form_submit($data);
             echo form_close();
         ?>
